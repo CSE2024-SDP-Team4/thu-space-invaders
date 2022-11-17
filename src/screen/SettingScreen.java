@@ -4,6 +4,7 @@ import java.awt.event.KeyEvent;
 import java.awt.*;
 import engine.Cooldown;
 import engine.Core;
+import engine.Sound;
 /**
  * Implements the setting screen, it shows setting menu.
  *
@@ -81,21 +82,25 @@ public class SettingScreen extends Screen {
                 && this.inputDelay.checkFinished()) {
             if (inputManager.isKeyDown(KeyEvent.VK_LEFT)
                     || inputManager.isKeyDown(KeyEvent.VK_A)) {
+                new Sound().buttonsound();
                 previousScreenMenuChange();
                 this.selectionCooldown.reset();
             }
             if (inputManager.isKeyDown(KeyEvent.VK_RIGHT)
                     || inputManager.isKeyDown(KeyEvent.VK_D)) {
+                new Sound().buttonsound();
                 nextScreenMenuChange();
                 this.selectionCooldown.reset();
             }
             if (inputManager.isKeyDown(KeyEvent.VK_UP)
                     || inputManager.isKeyDown(KeyEvent.VK_W)) {
+                new Sound().buttonsound();
                 previousItem();
                 this.selectionCooldown.reset();
             }
             if (inputManager.isKeyDown(KeyEvent.VK_DOWN)
                     || inputManager.isKeyDown(KeyEvent.VK_S)) {
+                new Sound().buttonsound();
                 nextItem();
                 this.selectionCooldown.reset();
             }
