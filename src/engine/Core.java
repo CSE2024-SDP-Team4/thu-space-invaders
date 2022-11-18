@@ -118,7 +118,7 @@ public final class Core {
 	/**
 	 * Frame to draw the screen on.
 	 */
-	private static Frame frame;
+	public static Frame frame;
 	/**
 	 * Screen currently shown.
 	 */
