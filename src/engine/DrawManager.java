@@ -1257,38 +1257,47 @@ public final class DrawManager {
 	 */
 	public void drawLevelItems(final Screen screen, final int option, final int levelchange) {
 
+		String levelPractice = "Practice Mode";
 		String levelEasy = "EASY";
 		String levelNormal = "NORMAL";
 		String levelHard = "HARD";
 		String levelReturnToMenu = "Return To Main Menu";
 		String levelExitProgram = "Exit Program";
 
-		// returnCode == 400080 : levelMode_Easy
+		// returnCode == 400080 : levelMode_Practice
 		if (option == 400080)
 			backBufferGraphics.setColor(HUDSettingScreen.getScreenColor());
 		else
 			backBufferGraphics.setColor(Color.WHITE);
-		drawCenteredRegularString(screen, levelEasy,
-				screen.getHeight() / 3 + fontRegular2Metrics.getHeight() * 2);
+		drawCenteredRegularString(screen, levelPractice,
+				screen.getHeight() / 3 + fontRegular2Metrics.getHeight());
 
-		// returnCode == 400090 : levelMode_Normal
+		// returnCode == 400080 : levelMode_Easy
 		if (option == 400090)
 			backBufferGraphics.setColor(HUDSettingScreen.getScreenColor());
 		else
 			backBufferGraphics.setColor(Color.WHITE);
-		drawCenteredRegularString(screen, levelNormal,
-				screen.getHeight() / 3 + fontRegular2Metrics.getHeight() * 4);
+		drawCenteredRegularString(screen, levelEasy,
+				screen.getHeight() / 3 + fontRegular2Metrics.getHeight() * 3);
 
-		// returnCode == 400100 : levelMode_Hard
+		// returnCode == 400090 : levelMode_Normal
 		if (option == 400100)
 			backBufferGraphics.setColor(HUDSettingScreen.getScreenColor());
 		else
 			backBufferGraphics.setColor(Color.WHITE);
+		drawCenteredRegularString(screen, levelNormal,
+				screen.getHeight() / 3 + fontRegular2Metrics.getHeight() * 5);
+
+		// returnCode == 400100 : levelMode_Hard
+		if (option == 400110)
+			backBufferGraphics.setColor(HUDSettingScreen.getScreenColor());
+		else
+			backBufferGraphics.setColor(Color.WHITE);
 		drawCenteredRegularString(screen, levelHard,
-				screen.getHeight() / 3 + fontRegular2Metrics.getHeight() * 6);
+				screen.getHeight() / 3 + fontRegular2Metrics.getHeight() * 7);
 
 		// returnCode == 400110 : levelReturnToMenu
-		if (option == 400110)
+		if (option == 400120)
 			backBufferGraphics.setColor(HUDSettingScreen.getScreenColor());
 		else
 			backBufferGraphics.setColor(Color.WHITE);
@@ -1296,7 +1305,7 @@ public final class DrawManager {
 				screen.getHeight() / 3 + fontRegular2Metrics.getHeight() * 10);
 
 		// returnCode == 400120 : levelExitProgram
-		if (option == 400120)
+		if (option == 400130)
 			backBufferGraphics.setColor(HUDSettingScreen.getScreenColor());
 		else
 			backBufferGraphics.setColor(Color.WHITE);

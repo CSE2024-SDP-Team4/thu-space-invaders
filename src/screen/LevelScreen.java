@@ -72,11 +72,6 @@ public class LevelScreen extends Screen {
             }
             if (inputManager.isKeyDown(KeyEvent.VK_SPACE))
                 this.isRunning = false;
-
-            // 추후 수정
-            //if (this.returnCode == 400070){
-            //    playLevel();
-            //}
         }
     }
 
@@ -100,6 +95,8 @@ public class LevelScreen extends Screen {
         else if (this.returnCode == 400110)
             this.returnCode = 400120;
         else if (this.returnCode == 400120)
+            this.returnCode = 400130;
+        else if (this.returnCode == 400130)
             this.returnCode = 400080;
     }
 
@@ -115,7 +112,7 @@ public class LevelScreen extends Screen {
         // 400110 = Return To Main Menu
         // 400120 = Exit Program
         if (this.returnCode == 400080)
-            this.returnCode = 400120;
+            this.returnCode = 400130;
         else if (this.returnCode == 400090)
             this.returnCode = 400080;
         else if (this.returnCode == 400100)
@@ -124,6 +121,8 @@ public class LevelScreen extends Screen {
             this.returnCode = 400100;
         else if (this.returnCode == 400120)
             this.returnCode = 400110;
+        else if (this.returnCode == 400130)
+            this.returnCode = 400120;
     }
 
     /**

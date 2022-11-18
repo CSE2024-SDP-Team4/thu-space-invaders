@@ -7,13 +7,9 @@ import java.util.logging.FileHandler;
 import java.util.logging.Handler;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import java.util.Scanner;
-
 import entity.Ship;
 import screen.*;
-
 import javax.sound.sampled.Clip;
-
 import engine.Inventory.InventoryEntry;
 
 /**
@@ -27,6 +23,10 @@ public final class Core {
 	/**
 	 * difficulty of game
 	 */
+	// diff == 0 : practice
+	// diff == 1 : easy
+	// diff == 2 : normal
+	// diff == 3 : hard
 	public static int diff;
 
 	/** Bgm player */
@@ -160,7 +160,6 @@ public final class Core {
 	private static final Item Test6 =
 			new Item(2002, "Store BGM 2", 1000);
 
-
 	/**
 	 * Test implementation.
 	 *
@@ -232,8 +231,6 @@ public final class Core {
 
 			switch (returnCode) {
 
-
-
 			case 1:
 				// Main menu.
 				currentScreen = new TitleScreen(width, height, FPS);
@@ -251,90 +248,179 @@ public final class Core {
 				LOGGER.info("Closing setting screen.");
 				break;
 
-				case 400070:
-					// Game Start
-					Scanner sc = new Scanner(System.in);
-					LOGGER.info("Select your difficulty 0 is practice, 1 is easy, 2 is normal, 3 is hard");
-					diff = sc.nextInt();
-					while(diff < 0 || diff > 3){
-						new Sound().backroundmusic();
-						LOGGER.info("Select your difficulty 0 is practice, 1 is easy, 2 is normal, 3 is hard");
-						diff = sc.nextInt();
-					}
-					if(diff == 0) {
-						do {
-							// One extra live every few levels.
-							boolean bonusLife = gameState.getLevel()
-									% EXTRA_LIFE_FRECUENCY == 0
-									&& gameState.getLivesRemaining() < MAX_LIVES;
+				case 400080:
+					// Practice Mode
+					diff = 0;
+					do {
+						// One extra live every few levels.
+						boolean bonusLife = gameState.getLevel()
+								% EXTRA_LIFE_FRECUENCY == 0
+								&& gameState.getLivesRemaining() < MAX_LIVES;
 
-							currentScreen = new PracticeScreen(gameState,
-									gameSettings.get(gameState.getLevel() - 1),
-									bonusLife, width, height, FPS);
-							LOGGER.info("Starting " + WIDTH + "x" + HEIGHT
-									+ " game screen at " + FPS + " fps.");
-							frame.setScreen(currentScreen);
-							LOGGER.info("Closing game screen.");
-
-							gameState = ((PracticeScreen) currentScreen).getGameState();
-
-							gameState = new GameState(gameState.getLevel() + 1,
-									gameState.getScore(),
-									gameState.getLivesRemaining(),
-									gameState.getBulletsShot(),
-									gameState.getShipsDestroyed(), 0);
-
-						} while (gameState.getLivesRemaining() > 0
-								&& gameState.getLevel()%NUM_LEVELS != 0);
-
+						currentScreen = new PracticeScreen(gameState,
+								gameSettings.get(gameState.getLevel() - 1),
+								bonusLife, width, height, FPS);
 						LOGGER.info("Starting " + WIDTH + "x" + HEIGHT
-								+ " score screen at " + FPS + " fps, with a score of "
-								+ gameState.getScore() + ", "
-								+ gameState.getLivesRemaining() + " lives remaining, "
-								+ gameState.getBulletsShot() + " bullets shot and "
-								+ gameState.getShipsDestroyed() + " ships destroyed.");
-						// Return to main menu.
-						returnCode = 1;
-						LOGGER.info("Closing score screen.");
-					} else {
-						do {
-							new Sound().backroundmusic();
-							// One extra live every few levels.
-							boolean bonusLife = gameState.getLevel()
-									% EXTRA_LIFE_FRECUENCY == 0
-									&& gameState.getLivesRemaining() < MAX_LIVES;
+								+ " game screen at " + FPS + " fps.");
+						frame.setScreen(currentScreen);
+						LOGGER.info("Closing game screen.");
 
-							currentScreen = new GameScreen(gameState,
-									gameSettings.get((diff - 1) * 5),
-									bonusLife, width, height, FPS);
-							LOGGER.info("Starting " + WIDTH + "x" + HEIGHT
-									+ " game screen at " + FPS + " fps.");
-							frame.setScreen(currentScreen);
-							LOGGER.info("Closing game screen.");
+						gameState = ((PracticeScreen) currentScreen).getGameState();
 
-							gameState = ((GameScreen) currentScreen).getGameState();
+						gameState = new GameState(gameState.getLevel() + 1,
+								gameState.getScore(),
+								gameState.getLivesRemaining(),
+								gameState.getBulletsShot(),
+								gameState.getShipsDestroyed(), 0);
 
-							gameState = new GameState(gameState.getLevel() + 1,
-									gameState.getScore(),
-									gameState.getLivesRemaining(),
-									gameState.getBulletsShot(),
-									gameState.getShipsDestroyed(),
-									gameState.getCoin());
+					} while (gameState.getLivesRemaining() > 0
+							&& gameState.getLevel()%NUM_LEVELS != 0);
 
-						} while (gameState.getLivesRemaining() > 0
-								&& gameState.getLevel()%NUM_LEVELS != 0);
-
-						LOGGER.info("Starting " + WIDTH + "x" + HEIGHT
-								+ " score screen at " + FPS + " fps, with a score of "
-								+ gameState.getScore() + ", "
-								+ gameState.getLivesRemaining() + " lives remaining, "
-								+ gameState.getBulletsShot() + " bullets shot and "
-								+ gameState.getShipsDestroyed() + " ships destroyed.");
-						currentScreen = new ScoreScreen(width, height, FPS, gameState);
-						returnCode = frame.setScreen(currentScreen);
-						LOGGER.info("Closing score screen.");
-					}
+					LOGGER.info("Starting " + WIDTH + "x" + HEIGHT
+							+ " score screen at " + FPS + " fps, with a score of "
+							+ gameState.getScore() + ", "
+							+ gameState.getLivesRemaining() + " lives remaining, "
+							+ gameState.getBulletsShot() + " bullets shot and "
+							+ gameState.getShipsDestroyed() + " ships destroyed.");
+					// practice finished. Return to main menu.
+					returnCode = 1;
+					LOGGER.info("Closing score screen.");
 					break;
+
+
+				case 400090:
+					// Easy Mode
+					diff = 1;
+					do {
+						new Sound().backroundmusic();
+						// One extra live every few levels.
+						boolean bonusLife = gameState.getLevel()
+								% EXTRA_LIFE_FRECUENCY == 0
+								&& gameState.getLivesRemaining() < MAX_LIVES;
+
+						currentScreen = new GameScreen(gameState,
+								gameSettings.get((diff - 1) * 5),
+								bonusLife, width, height, FPS);
+						LOGGER.info("Starting " + WIDTH + "x" + HEIGHT
+								+ " game screen at " + FPS + " fps.");
+						frame.setScreen(currentScreen);
+						LOGGER.info("Closing game screen.");
+
+						gameState = ((GameScreen) currentScreen).getGameState();
+
+						gameState = new GameState(gameState.getLevel() + 1,
+								gameState.getScore(),
+								gameState.getLivesRemaining(),
+								gameState.getBulletsShot(),
+								gameState.getShipsDestroyed(),
+								gameState.getCoin());
+
+					} while (gameState.getLivesRemaining() > 0
+							&& gameState.getLevel()%NUM_LEVELS != 0);
+
+					LOGGER.info("Starting " + WIDTH + "x" + HEIGHT
+							+ " score screen at " + FPS + " fps, with a score of "
+							+ gameState.getScore() + ", "
+							+ gameState.getLivesRemaining() + " lives remaining, "
+							+ gameState.getBulletsShot() + " bullets shot and "
+							+ gameState.getShipsDestroyed() + " ships destroyed.");
+					currentScreen = new ScoreScreen(width, height, FPS, gameState);
+					returnCode = frame.setScreen(currentScreen);
+					LOGGER.info("Closing score screen.");
+					break;
+
+				case 400100:
+					// Normal Mode
+					diff = 2;
+					do {
+						new Sound().backroundmusic();
+						// One extra live every few levels.
+						boolean bonusLife = gameState.getLevel()
+								% EXTRA_LIFE_FRECUENCY == 0
+								&& gameState.getLivesRemaining() < MAX_LIVES;
+
+						currentScreen = new GameScreen(gameState,
+								gameSettings.get((diff - 1) * 5),
+								bonusLife, width, height, FPS);
+						LOGGER.info("Starting " + WIDTH + "x" + HEIGHT
+								+ " game screen at " + FPS + " fps.");
+						frame.setScreen(currentScreen);
+						LOGGER.info("Closing game screen.");
+
+						gameState = ((GameScreen) currentScreen).getGameState();
+
+						gameState = new GameState(gameState.getLevel() + 1,
+								gameState.getScore(),
+								gameState.getLivesRemaining(),
+								gameState.getBulletsShot(),
+								gameState.getShipsDestroyed(),
+								gameState.getCoin());
+
+					} while (gameState.getLivesRemaining() > 0
+							&& gameState.getLevel()%NUM_LEVELS != 0);
+
+					LOGGER.info("Starting " + WIDTH + "x" + HEIGHT
+							+ " score screen at " + FPS + " fps, with a score of "
+							+ gameState.getScore() + ", "
+							+ gameState.getLivesRemaining() + " lives remaining, "
+							+ gameState.getBulletsShot() + " bullets shot and "
+							+ gameState.getShipsDestroyed() + " ships destroyed.");
+					currentScreen = new ScoreScreen(width, height, FPS, gameState);
+					returnCode = frame.setScreen(currentScreen);
+					LOGGER.info("Closing score screen.");
+					break;
+
+				case 400110:
+					// Hard Mode
+					diff = 3;
+					do {
+						new Sound().backroundmusic();
+						// One extra live every few levels.
+						boolean bonusLife = gameState.getLevel()
+								% EXTRA_LIFE_FRECUENCY == 0
+								&& gameState.getLivesRemaining() < MAX_LIVES;
+
+						currentScreen = new GameScreen(gameState,
+								gameSettings.get((diff - 1) * 5),
+								bonusLife, width, height, FPS);
+						LOGGER.info("Starting " + WIDTH + "x" + HEIGHT
+								+ " game screen at " + FPS + " fps.");
+						frame.setScreen(currentScreen);
+						LOGGER.info("Closing game screen.");
+
+						gameState = ((GameScreen) currentScreen).getGameState();
+
+						gameState = new GameState(gameState.getLevel() + 1,
+								gameState.getScore(),
+								gameState.getLivesRemaining(),
+								gameState.getBulletsShot(),
+								gameState.getShipsDestroyed(),
+								gameState.getCoin());
+
+					} while (gameState.getLivesRemaining() > 0
+							&& gameState.getLevel()%NUM_LEVELS != 0);
+
+					LOGGER.info("Starting " + WIDTH + "x" + HEIGHT
+							+ " score screen at " + FPS + " fps, with a score of "
+							+ gameState.getScore() + ", "
+							+ gameState.getLivesRemaining() + " lives remaining, "
+							+ gameState.getBulletsShot() + " bullets shot and "
+							+ gameState.getShipsDestroyed() + " ships destroyed.");
+					currentScreen = new ScoreScreen(width, height, FPS, gameState);
+					returnCode = frame.setScreen(currentScreen);
+					LOGGER.info("Closing score screen.");
+					break;
+
+				case 400120:
+					// Return to Main Menu
+					returnCode = 1;
+					break;
+
+				case 400130:
+					// Exit Program
+					returnCode = 0;
+					break;
+
 
 			case 3:
 				// High scores.
@@ -406,8 +492,6 @@ public final class Core {
 		fileHandler.close();
 		System.exit(0);
 	}
-
-
 
 	/**
 	 * Constructor, not called.
