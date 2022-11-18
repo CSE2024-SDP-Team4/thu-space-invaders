@@ -17,10 +17,6 @@ public class LevelScreen extends Screen {
      */
     private static final int SELECTION_TIME = 200;
     /**
-     * Level(difficulty) change
-     */
-    public static int levelchange;
-    /**
      * Time between changes in user selection.
      */
     private Cooldown selectionCooldown;
@@ -35,7 +31,6 @@ public class LevelScreen extends Screen {
         super(width, height, fps);
 
         this.returnCode = 400080;
-        this.levelchange = 1;
         this.selectionCooldown = Core.getCooldown(SELECTION_TIME);
         this.selectionCooldown.reset();
     }
@@ -132,7 +127,7 @@ public class LevelScreen extends Screen {
         drawManager.initDrawing(this);
 
         drawManager.drawLevelMenu(this);
-        drawManager.drawLevelItems(this, this.returnCode, this.levelchange);
+        drawManager.drawLevelItems(this, this.returnCode);
         drawManager.completeDrawing(this);
     }
 }

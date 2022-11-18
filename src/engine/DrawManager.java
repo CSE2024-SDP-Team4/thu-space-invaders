@@ -1255,7 +1255,7 @@ public final class DrawManager {
 	 *
 	 * @param screen Screen to draw on.
 	 */
-	public void drawLevelItems(final Screen screen, final int option, final int levelchange) {
+	public void drawLevelItems(final Screen screen, final int option) {
 
 		String levelPractice = "Practice Mode";
 		String levelEasy = "EASY";

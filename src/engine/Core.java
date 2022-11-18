@@ -252,6 +252,7 @@ public final class Core {
 					// Practice Mode
 					diff = 0;
 					do {
+						new Sound().backroundmusic();
 						// One extra live every few levels.
 						boolean bonusLife = gameState.getLevel()
 								% EXTRA_LIFE_FRECUENCY == 0
