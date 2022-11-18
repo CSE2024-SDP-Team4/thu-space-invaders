@@ -243,7 +243,7 @@ public final class Core {
 				LOGGER.info("Closing title screen.");
 				break;
 			case 2:
-				//level
+				// Play & Level Screen
 				currentScreen = new LevelScreen(width, height, FPS);
 				LOGGER.info("Starting " + WIDTH + "x" + HEIGHT
 						+ " setting screen at " + FPS + " fps.");
@@ -251,9 +251,8 @@ public final class Core {
 				LOGGER.info("Closing setting screen.");
 				break;
 
-				case 101:
-					// Game & score
-
+				case 400070:
+					// Game Start
 					Scanner sc = new Scanner(System.in);
 					LOGGER.info("Select your difficulty 0 is practice, 1 is easy, 2 is normal, 3 is hard");
 					diff = sc.nextInt();

@@ -28,7 +28,7 @@ import static screen.ShopScreen.selecteditem;
  * Manages screen drawing.
  * 
  * @author <a href="mailto:RobertoIA1987@gmail.com">Roberto Izquierdo Amo</a>
- * 
+ *
  */
 public final class DrawManager {
 
@@ -1229,57 +1229,79 @@ public final class DrawManager {
 			offset += fontRegularMetrics.getHeight();
 		}
 	}
-	public void drawLevelMenu(final Screen screen, final int option) {
-		String levelString = "LEVEL";
-		String instructionsString = "Press Space to return";
-		String level1 = "EASY:";
-		String level2 = "NORMAL:";
-		String level3 = "HARD:";
-		String stage1 = "1";
-		String stage2 = "2";
-		String stage3 = "3";
-		String stage4 = "4";
-		String stage5 = "5";
 
+	/**
+	 * Draws level menu(title).
+	 *
+	 * @param screen Screen to draw on.
+	 */
+	public void drawLevelMenu(final Screen screen) {
+		String levelScreenTitle = "LEVEL";
+		String levelScreenSubTitle = "Press Space To Play";
+
+		// levelScreenTitle
 		backBufferGraphics.setColor(HUDSettingScreen.getScreenColor());
-		drawCenteredBigString(screen, levelString, screen.getHeight() / 8);
+		drawCenteredBigString(screen, levelScreenTitle,
+				screen.getHeight() / 8);
 
+		// levelScreenSubTitle
 		backBufferGraphics.setColor(Color.GRAY);
-		drawCenteredRegularString(screen, instructionsString, screen.getHeight() / 5);
+		drawCenteredRegularString(screen, levelScreenSubTitle,
+				screen.getHeight() / 5);
+	}
 
-		if (option == 1)
+	/**
+	 * Draws level items(easy, normal, hard, return to main menu, exit).
+	 *
+	 * @param screen Screen to draw on.
+	 */
+	public void drawLevelItems(final Screen screen, final int option, final int levelchange) {
+
+		String levelEasy = "EASY";
+		String levelNormal = "NORMAL";
+		String levelHard = "HARD";
+		String levelReturnToMenu = "Return To Main Menu";
+		String levelExitProgram = "Exit Program";
+
+		// returnCode == 400080 : levelMode_Easy
+		if (option == 400080)
 			backBufferGraphics.setColor(HUDSettingScreen.getScreenColor());
 		else
 			backBufferGraphics.setColor(Color.WHITE);
+		drawCenteredRegularString(screen, levelEasy,
+				screen.getHeight() / 3 + fontRegular2Metrics.getHeight() * 2);
 
-		backBufferGraphics.drawString(level1, 13, 220);
-		backBufferGraphics.drawString(stage1, 150, 220);
-		backBufferGraphics.drawString(stage2, 210, 220);
-		backBufferGraphics.drawString(stage3, 270, 220);
-		backBufferGraphics.drawString(stage4, 330, 220);
-		backBufferGraphics.drawString(stage5, 390, 220);
-
-		if (option == 2)
+		// returnCode == 400090 : levelMode_Normal
+		if (option == 400090)
 			backBufferGraphics.setColor(HUDSettingScreen.getScreenColor());
 		else
 			backBufferGraphics.setColor(Color.WHITE);
-		backBufferGraphics.drawString(level2, 13, 280);
-		backBufferGraphics.drawString(stage1, 150, 280);
-		backBufferGraphics.drawString(stage2, 210, 280);
-		backBufferGraphics.drawString(stage3, 270, 280);
-		backBufferGraphics.drawString(stage4, 330, 280);
-		backBufferGraphics.drawString(stage5, 390, 280);
+		drawCenteredRegularString(screen, levelNormal,
+				screen.getHeight() / 3 + fontRegular2Metrics.getHeight() * 4);
 
-		if (option == 3)
+		// returnCode == 400100 : levelMode_Hard
+		if (option == 400100)
 			backBufferGraphics.setColor(HUDSettingScreen.getScreenColor());
 		else
 			backBufferGraphics.setColor(Color.WHITE);
-		backBufferGraphics.drawString(level3, 13, 340);
-		backBufferGraphics.drawString(stage1, 150, 340);
-		backBufferGraphics.drawString(stage2, 210, 340);
-		backBufferGraphics.drawString(stage3, 270, 340);
-		backBufferGraphics.drawString(stage4, 330, 340);
-		backBufferGraphics.drawString(stage5, 390, 340);
+		drawCenteredRegularString(screen, levelHard,
+				screen.getHeight() / 3 + fontRegular2Metrics.getHeight() * 6);
+
+		// returnCode == 400110 : levelReturnToMenu
+		if (option == 400110)
+			backBufferGraphics.setColor(HUDSettingScreen.getScreenColor());
+		else
+			backBufferGraphics.setColor(Color.WHITE);
+		drawCenteredRegularString(screen, levelReturnToMenu,
+				screen.getHeight() / 3 + fontRegular2Metrics.getHeight() * 10);
+
+		// returnCode == 400120 : levelExitProgram
+		if (option == 400120)
+			backBufferGraphics.setColor(HUDSettingScreen.getScreenColor());
+		else
+			backBufferGraphics.setColor(Color.WHITE);
+		drawCenteredRegularString(screen, levelExitProgram,
+				screen.getHeight() / 3 + fontRegular2Metrics.getHeight() * 12);
 
 	}
 }
