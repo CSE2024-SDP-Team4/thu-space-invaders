@@ -1313,5 +1313,43 @@ public final class DrawManager {
 				screen.getHeight() / 3 + fontRegular2Metrics.getHeight() * 12);
 
 	}
+
+	public void drawSelectPlayer(final Screen screen) {
+		String PlayerSelectTitle = "NUMBER OF PLAYER";
+		String PlayerSelectSubTitle = "Press Space To Play";
+
+		// levelScreenTitle
+		backBufferGraphics.setColor(HUDSettingScreen.getScreenColor());
+		drawCenteredBigString(screen, PlayerSelectTitle,
+				screen.getHeight() / 8);
+
+		// levelScreenSubTitle
+		backBufferGraphics.setColor(Color.GRAY);
+		drawCenteredRegularString(screen, PlayerSelectSubTitle,
+				screen.getHeight() / 5);
+	}
+
+	public void drawSelectItems(final Screen screen, final int option) {
+		String Select1p = "1 PLAYER";
+		String Select2p = "2 PLAYER";
+
+		// returnCode == 400090 : levelMode_Normal
+		if (option == 1)
+			backBufferGraphics.setColor(HUDSettingScreen.getScreenColor());
+		else
+			backBufferGraphics.setColor(Color.WHITE);
+		drawCenteredRegularString(screen, Select1p,
+				screen.getHeight() / 3 + fontRegular2Metrics.getHeight() * 3);
+
+
+		// returnCode == 400120 : levelExitProgram
+		if (option == 2)
+			backBufferGraphics.setColor(HUDSettingScreen.getScreenColor());
+		else
+			backBufferGraphics.setColor(Color.WHITE);
+		drawCenteredRegularString(screen, Select2p,
+				screen.getHeight() / 3 + fontRegular2Metrics.getHeight() * 7);
+
+	}
 }
 
