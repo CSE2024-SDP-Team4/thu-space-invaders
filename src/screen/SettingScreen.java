@@ -104,11 +104,15 @@ public class SettingScreen extends Screen {
                 nextItem();
                 this.selectionCooldown.reset();
             }
-            if (inputManager.isKeyDown(KeyEvent.VK_SPACE))
+            if (inputManager.isKeyDown(KeyEvent.VK_SPACE)){
+                Sound.stop();
                 this.isRunning = false;
-
+            }
             if (this.returnCode == 400010) {
                 changeScreenSize();
+            }
+            if (this.returnCode == 400020) {
+                changeMasterSound();
             }
         }
     }
@@ -117,6 +121,7 @@ public class SettingScreen extends Screen {
      * change screen size
      */
     private void changeScreenSize() {
+
         if (this.Screenchange == 1) // Standard
             Core.setSize(448, 520);
         else if (this.Screenchange == 2) // Extended
@@ -124,6 +129,21 @@ public class SettingScreen extends Screen {
         else if (this.Screenchange == 3) // Full Screen
             Core.setSize(screenSize.width, screenSize.height);
     }
+
+    private void changeMasterSound(){
+        if(this.MasterSoundchange == 1)
+            Sound.setMasterChange(0.2f);
+        else if (this.MasterSoundchange == 2)
+            Sound.setMasterChange(0.5f);
+        else if (this.MasterSoundchange == 3)
+            Sound.setMasterChange(0.7f);
+        else if (this.MasterSoundchange == 4)
+            Sound.setMasterChange(1.0f);
+        else if (this.MasterSoundchange == 5)
+            Sound.setMasterChange(0.0f);
+    }
+
+
 
 
     /**
@@ -256,6 +276,7 @@ public class SettingScreen extends Screen {
      * Shifts the focus to the next change in the settings option.
      */
     private void nextScreenMenuChange() {
+        // 400010 = Screen Size
         if (this.returnCode == 400010) {
             int screenoption_changes = 3;
             if (this.Screenchange == screenoption_changes)
@@ -265,6 +286,7 @@ public class SettingScreen extends Screen {
             else
                 this.Screenchange++;
         }
+        // 400020 = Master sound
         if (this.returnCode == 400020) {
             int MasterSoundoption_change = 5;
             if(this.MasterSoundchange == MasterSoundoption_change)
@@ -274,6 +296,7 @@ public class SettingScreen extends Screen {
             else
                 this.MasterSoundchange++;
         }
+        // 400030 = Music sound
         if (this.returnCode == 400030) {
             int MasterSoundoption_change = 5;
             if(this.MusicSoundchange == MasterSoundoption_change)
@@ -283,6 +306,7 @@ public class SettingScreen extends Screen {
             else
                 this.MusicSoundchange++;
         }
+        // 400040 = Effect sound
         if (this.returnCode == 400040) {
             int MasterSoundoption_change = 5;
             if(this.EffectSoundchange == MasterSoundoption_change)

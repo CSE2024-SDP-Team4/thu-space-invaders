@@ -226,6 +226,8 @@ public final class Core {
 
 		GameState gameState;
 
+		Sound.backgroundmusic();
+
 		int returnCode = 1;
 		do {
 			gameState = new GameState(1, 0, MAX_LIVES, 0, 0, Coin.balance);
@@ -258,7 +260,6 @@ public final class Core {
 					LOGGER.info("Select your difficulty 0 is practice, 1 is easy, 2 is normal, 3 is hard");
 					diff = sc.nextInt();
 					while(diff < 0 || diff > 3){
-						new Sound().backroundmusic();
 						LOGGER.info("Select your difficulty 0 is practice, 1 is easy, 2 is normal, 3 is hard");
 						diff = sc.nextInt();
 					}
@@ -299,7 +300,6 @@ public final class Core {
 						LOGGER.info("Closing score screen.");
 					} else {
 						do {
-							new Sound().backroundmusic();
 							// One extra live every few levels.
 							boolean bonusLife = gameState.getLevel()
 									% EXTRA_LIFE_FRECUENCY == 0
@@ -371,11 +371,12 @@ public final class Core {
 				LOGGER.info("Closing HUDSetting screen.");
 				break;
 
-            case 400010:
+            case 400010: case 400020: case 400030: case 400040:
 	            // Main menu.
 	            /* This makes the old window disappear */
 	            Frame old_frame = frame;
 	            /* This creates a new window with new width & height values */
+				Sound.backgroundmusic();
 	            frame = new Frame(WIDTH, HEIGHT);
 	            DrawManager.getInstance().setFrame(frame);
 	            width = frame.getWidth();
