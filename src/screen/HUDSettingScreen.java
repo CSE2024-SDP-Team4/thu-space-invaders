@@ -14,7 +14,10 @@ public class HUDSettingScreen extends Screen {
     /**
      * Screen change parameter
      */
+    public static int onoffchange;
     public static int colorchange;
+
+    public static boolean isshake;
     /** Milliseconds between changes in user selection. */
     private static final int SELECTION_TIME = 200;
 
@@ -34,6 +37,8 @@ public class HUDSettingScreen extends Screen {
     public HUDSettingScreen(final int width, final int height, final int fps) {
         super(width, height, fps);
         this.colorchange = 1;
+        this.onoffchange = 0;
+        this.isshake = true;
         this.returnCode = 4;
 
         this.selectionCooldown = Core.getCooldown(SELECTION_TIME);
@@ -62,6 +67,17 @@ public class HUDSettingScreen extends Screen {
         if (this.selectionCooldown.checkFinished()
                 && this.inputDelay.checkFinished()) {
 
+            if (inputManager.isKeyDown(KeyEvent.VK_LEFT)
+                    || inputManager.isKeyDown(KeyEvent.VK_A)) {
+                previousONOFFChange();
+                this.selectionCooldown.reset();
+            }
+            if (inputManager.isKeyDown(KeyEvent.VK_RIGHT)
+                    || inputManager.isKeyDown(KeyEvent.VK_D)) {
+                nextONOFFChange();
+                this.selectionCooldown.reset();
+            }
+
             if (inputManager.isKeyDown(KeyEvent.VK_UP)
                     || inputManager.isKeyDown(KeyEvent.VK_W)) {
                 previousItem();
@@ -74,31 +90,64 @@ public class HUDSettingScreen extends Screen {
             }
             if (inputManager.isKeyDown(KeyEvent.VK_SPACE))
                 this.isRunning = false;
-                this.returnCode = 4;
-
+            if (this.colorchange == 1)
+                changeScreenShake();
         }
     }
 
+    private void nextONOFFChange(){
+        int shakenextonoffchange = 1;
+        if(this.onoffchange == shakenextonoffchange)
+            this.onoffchange = 0;
+        else if(this.onoffchange == 0){
+            this.onoffchange = 1;
+        }
+    }
+
+    private void previousONOFFChange(){
+        int shakepreonoffchange = 1;
+        if(this.onoffchange == 0)
+            this.onoffchange = shakepreonoffchange;
+        else if(this.onoffchange == 1)
+            this.onoffchange = 0;
+    }
+
     private void nextItem(){
-        if(this.colorchange == 3)
+        if(this.colorchange == 4) {
             this.colorchange = 1;
-        else if(this.colorchange == 1)
+            this.onoffchange = 0;
+        }
+        else if(this.colorchange == 1){
             this.colorchange = 2;
-        else if(this.colorchange == 2)
+            this.onoffchange = 0;
+        }
+        else if(this.colorchange == 2){
             this.colorchange = 3;
-        else
-            this.colorchange++;
+            this.onoffchange = 0;
+        }
+        else if(this.colorchange == 3){
+            this.colorchange = 4;
+            this.onoffchange = 0;
+        }
     }
 
     private void previousItem(){
-        if(this.colorchange == 1)
+        if(this.colorchange == 1){
+            this.colorchange = 4;
+            this.onoffchange = 0;
+        }
+        else if(this.colorchange == 4){
             this.colorchange = 3;
-        else if(this.colorchange == 3)
+            this.onoffchange = 0;
+        }
+        else if(this.colorchange == 3){
             this.colorchange = 2;
-        else if(this.colorchange == 2)
+            this.onoffchange = 0;
+        }
+        else if(this.colorchange == 2){
             this.colorchange = 1;
-        else
-            this.colorchange--;
+            this.onoffchange = 0;
+        }
     }
 
     /**
@@ -107,6 +156,7 @@ public class HUDSettingScreen extends Screen {
     private void draw() {
         drawManager.initDrawing(this);
         drawManager.drawHUDSettingMenu(this, this.colorchange);
+        drawManager.drawHUDSettingOption(this, this.colorchange, onoffchange);
         drawManager.completeDrawing(this);
     }
 
@@ -116,17 +166,30 @@ public class HUDSettingScreen extends Screen {
      * @return Color information
      */
     public static Color getScreenColor(){
-        if(HUDSettingScreen.colorchange == 1){
+        if(HUDSettingScreen.colorchange == 2){
             return Color.GREEN;
         }
-        else if(HUDSettingScreen.colorchange == 2){
+        else if(HUDSettingScreen.colorchange == 3){
             return Color.RED;
         }
-        else if(HUDSettingScreen.colorchange == 3){
+        else if(HUDSettingScreen.colorchange == 4){
             return Color.BLUE;
         }
         else{
+
             return Color.GREEN;
+
         }
     }
+
+    public void changeScreenShake(){
+        if(this.onoffchange == 0){
+            this.isshake = true;
+        }
+        else{
+            this.isshake = false;
+        }
+
+    }
+
 }

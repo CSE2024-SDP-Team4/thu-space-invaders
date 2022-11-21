@@ -14,9 +14,9 @@ import screen.ShakeScreen;
 
 /**
  * Implements a ship, to be controlled by the player.
- * 
+ *
  * @author <a href="mailto:RobertoIA1987@gmail.com">Roberto Izquierdo Amo</a>
- * 
+ *
  */
 public class Ship extends Entity {
 
@@ -47,7 +47,7 @@ public class Ship extends Entity {
 	private boolean getItem=false;
 	/**
 	 * Constructor, establishes the ship's properties.
-	 * 
+	 *
 	 * @param positionX
 	 *                  Initial position of the ship in the X axis.
 	 * @param positionY
@@ -81,7 +81,7 @@ public class Ship extends Entity {
 				break;
 		}
 	}
-	
+
 	/**
 	 * Moves the ship speed units right, or until the right screen border is
 	 * reached.
@@ -100,7 +100,7 @@ public class Ship extends Entity {
 
 	/**
 	 * Shoots a bullet upwards.
-	 * 
+	 *
 	 * @param bullets
 	 *                List of bullets on screen, to add the new bullet.
 	 * @return Checks if the bullet was shot correctly.
@@ -179,14 +179,13 @@ public class Ship extends Entity {
 	public final void destroy() {
 		new Sound().explosionsound();
 		this.destructionCooldown.reset();
-
 		new Sound().explosionsound();
 		ShakeScreen.vibrate();
 	}
 
 	/**
 	 * Checks if the ship is destroyed.
-	 * 
+	 *
 	 * @return True if the ship is currently destroyed.
 	 */
 	public final boolean isDestroyed() {
@@ -211,7 +210,7 @@ public class Ship extends Entity {
 
 	/**
 	 * Getter for the ship's speed.
-	 * 
+	 *
 	 * @return Speed of the ship.
 	 */
 	public final int getSpeed() {
