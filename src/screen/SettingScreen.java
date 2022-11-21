@@ -106,6 +106,7 @@ public class SettingScreen extends Screen {
             }
             if (inputManager.isKeyDown(KeyEvent.VK_SPACE)){
                 Sound.stop();
+                Sound.backgroundmusic();
                 this.isRunning = false;
             }
             if (this.returnCode == 400010) {

@@ -1,7 +1,7 @@
 package screen;
 
-import java.awt.*;
 import java.awt.event.KeyEvent;
+import java.awt.*;
 import engine.Cooldown;
 import engine.Core;
 
@@ -11,20 +11,15 @@ import engine.Core;
  */
 
 public class LevelScreen extends Screen {
-    /**
-     * Screen change parameter
-     */
-    public static int colorchange;
+
     /**
      * Milliseconds between changes in user selection.
      */
     private static final int SELECTION_TIME = 200;
-
     /**
      * Time between changes in user selection.
      */
     private Cooldown selectionCooldown;
-
     /**
      * Constructor, establishes the properties of the screen.
      *
@@ -34,7 +29,8 @@ public class LevelScreen extends Screen {
      */
     public LevelScreen(final int width, final int height, final int fps) {
         super(width, height, fps);
-        this.returnCode = 101;
+
+        this.returnCode = 400080;
         this.selectionCooldown = Core.getCooldown(SELECTION_TIME);
         this.selectionCooldown.reset();
     }
@@ -57,66 +53,81 @@ public class LevelScreen extends Screen {
         super.update();
 
         draw();
-
         if (this.selectionCooldown.checkFinished()
                 && this.inputDelay.checkFinished()) {
-
             if (inputManager.isKeyDown(KeyEvent.VK_UP)
                     || inputManager.isKeyDown(KeyEvent.VK_W)) {
-                previouslevel();
+                previousLevel();
                 this.selectionCooldown.reset();
             }
             if (inputManager.isKeyDown(KeyEvent.VK_DOWN)
                     || inputManager.isKeyDown(KeyEvent.VK_S)) {
-                nextlevel();
+                nextLevel();
                 this.selectionCooldown.reset();
             }
             if (inputManager.isKeyDown(KeyEvent.VK_SPACE))
                 this.isRunning = false;
-
         }
     }
 
-    private void nextlevel() {
-        if (this.returnCode == 1)
-            this.returnCode = 4;
-        else if (this.returnCode == 0)
-            this.returnCode = 2;
-        else if (this.returnCode == 4)
-            this.returnCode = 0;
-        else if (this.returnCode == 2)
-            this.returnCode = 5;
-        else if (this.returnCode == 5)
-            this.returnCode = 3;
-        else
-            this.returnCode++;
+    /**
+     * Shifts the focus to the next level.
+     */
+    private void nextLevel() {
+        // returnCode
+        // 400070 = LevelScreen
+        // 400080 = Easy
+        // 400090 = Normal
+        // 400100 = Hard
+        // 400110 = Return To Main Menu
+        // 400120 = Exit Program
+        if (this.returnCode == 400080)
+            this.returnCode = 400090;
+        else if (this.returnCode == 400090)
+            this.returnCode = 400100;
+        else if (this.returnCode == 400100)
+            this.returnCode = 400110;
+        else if (this.returnCode == 400110)
+            this.returnCode = 400120;
+        else if (this.returnCode == 400120)
+            this.returnCode = 400130;
+        else if (this.returnCode == 400130)
+            this.returnCode = 400080;
     }
 
     /**
-     * Shifts the focus to the previous menu item.
+     * Shifts the focus to the previous level.
      */
-    private void previouslevel() {
-        if (this.returnCode == 0)
-            this.returnCode = 4;
-        else if (this.returnCode == 2)
-            this.returnCode = 0;
-        else if (this.returnCode == 4)
-            this.returnCode = 3;
-        else if (this.returnCode == 3)
-            this.returnCode = 5;
-        else if (this.returnCode == 5)
-            this.returnCode = 2;
-        else
-            this.returnCode--;
+    private void previousLevel() {
+        // returnCode
+        // 400070 = LevelScreen
+        // 400080 = Easy
+        // 400090 = Normal
+        // 400100 = Hard
+        // 400110 = Return To Main Menu
+        // 400120 = Exit Program
+        if (this.returnCode == 400080)
+            this.returnCode = 400130;
+        else if (this.returnCode == 400090)
+            this.returnCode = 400080;
+        else if (this.returnCode == 400100)
+            this.returnCode = 400090;
+        else if (this.returnCode == 400110)
+            this.returnCode = 400100;
+        else if (this.returnCode == 400120)
+            this.returnCode = 400110;
+        else if (this.returnCode == 400130)
+            this.returnCode = 400120;
     }
-
 
     /**
      * Draws the elements associated with the screen.
      */
     private void draw() {
         drawManager.initDrawing(this);
-        drawManager.drawLevelMenu(this, this.returnCode);
+
+        drawManager.drawLevelMenu(this);
+        drawManager.drawLevelItems(this, this.returnCode);
         drawManager.completeDrawing(this);
     }
 }
