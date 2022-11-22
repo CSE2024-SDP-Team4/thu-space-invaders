@@ -17,7 +17,7 @@ public class HUDSettingScreen extends Screen {
     public static int onoffchange;
     public static int colorchange;
 
-    public static boolean isshake;
+    public static boolean isshake = true;
     /** Milliseconds between changes in user selection. */
     private static final int SELECTION_TIME = 200;
 
