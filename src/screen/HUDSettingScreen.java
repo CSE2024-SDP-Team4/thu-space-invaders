@@ -18,6 +18,7 @@ public class HUDSettingScreen extends Screen {
     public static int colorchange;
 
     public static boolean isshake = true;
+    public static boolean isTransition = true;
     /** Milliseconds between changes in user selection. */
     private static final int SELECTION_TIME = 200;
 
@@ -39,6 +40,7 @@ public class HUDSettingScreen extends Screen {
         this.colorchange = 1;
         this.onoffchange = 0;
         this.isshake = true;
+        this.isTransition = true;
         this.returnCode = 4;
 
         this.selectionCooldown = Core.getCooldown(SELECTION_TIME);
@@ -92,28 +94,34 @@ public class HUDSettingScreen extends Screen {
                 this.isRunning = false;
             if (this.colorchange == 1)
                 changeScreenShake();
+
         }
     }
 
     private void nextONOFFChange(){
         int shakenextonoffchange = 1;
+
         if(this.onoffchange == shakenextonoffchange)
             this.onoffchange = 0;
         else if(this.onoffchange == 0){
             this.onoffchange = 1;
         }
+
+
     }
 
     private void previousONOFFChange(){
         int shakepreonoffchange = 1;
+
         if(this.onoffchange == 0)
             this.onoffchange = shakepreonoffchange;
         else if(this.onoffchange == 1)
             this.onoffchange = 0;
+
     }
 
     private void nextItem(){
-        if(this.colorchange == 4) {
+        if(this.colorchange == 5) {
             this.colorchange = 1;
             this.onoffchange = 0;
         }
@@ -129,10 +137,18 @@ public class HUDSettingScreen extends Screen {
             this.colorchange = 4;
             this.onoffchange = 0;
         }
+        else if(this.colorchange == 4){
+            this.colorchange = 5;
+            this.onoffchange = 0;
+        }
     }
 
     private void previousItem(){
         if(this.colorchange == 1){
+            this.colorchange = 5;
+            this.onoffchange = 0;
+        }
+        else if(this.colorchange == 5){
             this.colorchange = 4;
             this.onoffchange = 0;
         }
@@ -166,13 +182,13 @@ public class HUDSettingScreen extends Screen {
      * @return Color information
      */
     public static Color getScreenColor(){
-        if(HUDSettingScreen.colorchange == 2){
+        if(HUDSettingScreen.colorchange == 3){
             return Color.GREEN;
         }
-        else if(HUDSettingScreen.colorchange == 3){
+        else if(HUDSettingScreen.colorchange == 4){
             return Color.RED;
         }
-        else if(HUDSettingScreen.colorchange == 4){
+        else if(HUDSettingScreen.colorchange == 5){
             return Color.BLUE;
         }
         else{
@@ -190,6 +206,15 @@ public class HUDSettingScreen extends Screen {
             this.isshake = false;
         }
 
+    }
+
+    public void changeScreenTransition() {
+        if(this.onoffchange == 0) {
+            this.isTransition = true;
+        }
+        else {
+            this.isTransition = false;
+        }
     }
 
 }

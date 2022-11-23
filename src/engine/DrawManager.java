@@ -902,6 +902,7 @@ public final class DrawManager {
 		String option2 = "RED";
 		String option3 = "BLUE";
 		String option4 = "SHAKE ONOFF";
+		String option5 = "TRANSITION ONOFF";
 
 
 		backBufferGraphics.setColor(HUDSettingScreen.getScreenColor());
@@ -910,21 +911,21 @@ public final class DrawManager {
 		backBufferGraphics.setColor(Color.GRAY);
 		drawCenteredRegularString(screen, instructionsString, screen.getHeight() / 5);
 
-		if (option == 2)
+		if (option == 3)
 			backBufferGraphics.setColor(HUDSettingScreen.getScreenColor());
 		else
 			backBufferGraphics.setColor(Color.WHITE);
 		drawCenteredRegularString(screen, option1,
 				screen.getHeight() / 3 * 2);
 
-		if (option == 3)
+		if (option == 4)
 			backBufferGraphics.setColor(Color.RED);
 		else
 			backBufferGraphics.setColor(Color.WHITE);
 		drawCenteredRegularString(screen, option2, screen.getHeight()
 				/ 3 * 2 + fontRegularMetrics.getHeight() * 2);
 
-		if (option == 4)
+		if (option == 5)
 			backBufferGraphics.setColor(Color.BLUE);
 		else
 			backBufferGraphics.setColor(Color.WHITE);
@@ -937,8 +938,14 @@ public final class DrawManager {
 			backBufferGraphics.setColor(Color.WHITE);
 		drawLeftRegular2String(screen, option4, screen.getHeight() / 3 + fontRegular2Metrics.getHeight());
 
+		if (option == 2)
+			backBufferGraphics.setColor(HUDSettingScreen.getScreenColor());
+		else
+			backBufferGraphics.setColor(Color.WHITE);
+		drawLeftRegular2String(screen, option5, screen.getHeight() / 3 + fontRegular2Metrics.getHeight() * 3);
+
 		backBufferGraphics.setColor(Color.WHITE);
-		drawCenteredRegular2String(screen, coloroption, screen.getHeight() / 3 + fontRegular2Metrics.getHeight()*5);
+		drawCenteredRegular2String(screen, coloroption, screen.getHeight() / 3 + fontRegular2Metrics.getHeight() * 5);
 
 	}
 
@@ -960,11 +967,24 @@ public final class DrawManager {
 				backBufferGraphics.setColor(Color.WHITE);
 				defaultScreenmessage = OnOFFOption2;
 			}
-		} else {
+		}
+		else if (option == 2) {
+			if (onoffchange == 0) {
+				backBufferGraphics.setColor(Color.MAGENTA);
+				defaultScreenmessage = OnOFFOption1;
+			}
+			if (onoffchange == 1) {
+				backBufferGraphics.setColor(Color.WHITE);
+				defaultScreenmessage = OnOFFOption2;
+			}
+		}
+		else {
 			backBufferGraphics.setColor(Color.darkGray);
 		}
 		drawRightRegular2String(screen, defaultScreenmessage, screen.getHeight() / 3 + fontRegular2Metrics.getHeight());
+		drawRightRegular2String(screen, defaultScreenmessage, screen.getHeight() / 3 + fontRegular2Metrics.getHeight() * 3);
 	}
+
 
 	public void drawHelpMenu(final Screen screen) {
 		String HelpString = "Help";
