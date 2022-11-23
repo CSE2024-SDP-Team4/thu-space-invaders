@@ -10,9 +10,6 @@ public class Sound {
     private static float masterchange = 1.0f;
 
     private static Clip musicClip;
-    private static Clip bulletClip;
-    private static Clip explosionClip;
-    private static Clip buttonClip;
 
     public static void backgroundmusic(){
         if (Core.MusicOn_Off == 1){
@@ -44,7 +41,6 @@ public class Sound {
                 clip.open(audioInputStream);
                 SetMasterGain(clip);
                 clip.start();
-                bulletClip = clip;
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -60,7 +56,6 @@ public class Sound {
                 clip.open(audioInputStream);
                 SetMasterGain(clip);
                 clip.start();
-                explosionClip = clip;
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -76,7 +71,6 @@ public class Sound {
                 clip.open(audioInputStream);
                 SetMasterGain(clip);
                 clip.start();
-                buttonClip = clip;
             } catch (Exception e) {
                 e.printStackTrace();
             }
