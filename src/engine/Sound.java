@@ -10,67 +10,80 @@ public class Sound {
     private static float masterchange = 1.0f;
 
     private static Clip musicClip;
+    private static Clip bulletClip;
+    private static Clip explosionClip;
+    private static Clip buttonClip;
 
     public static void backgroundmusic(){
-        try{
-            String bgm = "Bgm/background.wav";
+        if (Core.MusicOn_Off == 1){
+            try{
+                String bgm = "Bgm/background.wav";
 
-            AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File(bgm).getAbsoluteFile());
-            Clip clip = AudioSystem.getClip();
-            clip.open(audioInputStream);
-            SetMasterGain(clip);
-            clip.start();
-            clip.loop(Clip.LOOP_CONTINUOUSLY);
+                AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File(bgm).getAbsoluteFile());
+                Clip clip = AudioSystem.getClip();
+                clip.open(audioInputStream);
+                SetMasterGain(clip);
+                clip.start();
+                clip.loop(Clip.LOOP_CONTINUOUSLY);
 
-            musicClip = clip;
+                musicClip = clip;
 
-        } catch (Exception e) {
-            e.printStackTrace();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
     }
 
     public static void bulletsound() {
-        try {
-            String bgm = "Bgm/ball.wav";
+        if (Core.EffectOn_Off == 1) {
+            try {
+                String bgm = "Bgm/ball.wav";
 
-            AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File(bgm).getAbsoluteFile());
-            Clip clip = AudioSystem.getClip();
-            clip.open(audioInputStream);
-            SetMasterGain(clip);
-            clip.start();
-        } catch (Exception e) {
-            e.printStackTrace();
+                AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File(bgm).getAbsoluteFile());
+                Clip clip = AudioSystem.getClip();
+                clip.open(audioInputStream);
+                SetMasterGain(clip);
+                clip.start();
+                bulletClip = clip;
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
     }
 
     public static void explosionsound() {
-        try {
-            String bgm = "Bgm/bomb.wav";
-            AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File(bgm).getAbsoluteFile());
-            Clip clip = AudioSystem.getClip();
-            clip.open(audioInputStream);
-            SetMasterGain(clip);
-            clip.start();
-        } catch (Exception e) {
-            e.printStackTrace();
+        if (Core.EffectOn_Off == 1) {
+            try {
+                String bgm = "Bgm/bomb.wav";
+                AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File(bgm).getAbsoluteFile());
+                Clip clip = AudioSystem.getClip();
+                clip.open(audioInputStream);
+                SetMasterGain(clip);
+                clip.start();
+                explosionClip = clip;
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
-
     }
 
     public static void buttonsound() {
-        try{
-            String bgm = "Bgm/button.wav";
-            AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File(bgm).getAbsoluteFile());
-            Clip clip = AudioSystem.getClip();
-            clip.open(audioInputStream);
-            SetMasterGain(clip);
-            clip.start();
-        } catch (Exception e) {
-            e.printStackTrace();
+        if (Core.EffectOn_Off == 1) {
+            try {
+                String bgm = "Bgm/button.wav";
+                AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File(bgm).getAbsoluteFile());
+                Clip clip = AudioSystem.getClip();
+                clip.open(audioInputStream);
+                SetMasterGain(clip);
+                clip.start();
+                buttonClip = clip;
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
     }
 
-    public static void stop(){
+    public static void MusicStop(){
         musicClip.stop();
     }
 
@@ -82,5 +95,4 @@ public class Sound {
     public static void setMasterChange(float newchange) {
         masterchange = newchange;
     }
-
 }

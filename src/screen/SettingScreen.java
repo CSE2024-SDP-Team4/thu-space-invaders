@@ -105,16 +105,25 @@ public class SettingScreen extends Screen {
                 this.selectionCooldown.reset();
             }
             if (inputManager.isKeyDown(KeyEvent.VK_SPACE)){
-                Sound.stop();
-                Sound.backgroundmusic();
+                if (this.returnCode == 400020) {
+                    changeMasterSound();
+                }
+                if (this.returnCode == 400030) {
+                    changeMusicSound();
+                }
+                if (this.returnCode == 400040) {
+                    changeEffectSound();
+                }
+                new Sound().buttonsound();
+                Sound.MusicStop();
                 this.isRunning = false;
+
             }
             if (this.returnCode == 400010) {
                 changeScreenSize();
             }
-            if (this.returnCode == 400020) {
-                changeMasterSound();
-            }
+
+
         }
     }
 
@@ -144,6 +153,19 @@ public class SettingScreen extends Screen {
             Sound.setMasterChange(0.0f);
     }
 
+    private void changeMusicSound(){
+        if(this.MusicSoundchange == 1)
+            Core.MusicOn_Off = 1;
+        else if (this.MusicSoundchange == 2)
+            Core.MusicOn_Off = 0;
+    }
+
+    private void changeEffectSound(){
+        if(this.EffectSoundchange == 1)
+            Core.EffectOn_Off = 1;
+        else if (this.EffectSoundchange == 2)
+            Core.EffectOn_Off = 0;
+    }
 
 
 
@@ -299,21 +321,17 @@ public class SettingScreen extends Screen {
         }
         // 400030 = Music sound
         if (this.returnCode == 400030) {
-            int MasterSoundoption_change = 5;
+            int MasterSoundoption_change = 2;
             if(this.MusicSoundchange == MasterSoundoption_change)
                 this.MusicSoundchange = 1;
-            else if (this.MusicSoundchange == 1)
-                this.MusicSoundchange = 2;
             else
                 this.MusicSoundchange++;
         }
         // 400040 = Effect sound
         if (this.returnCode == 400040) {
-            int MasterSoundoption_change = 5;
+            int MasterSoundoption_change = 2;
             if(this.EffectSoundchange == MasterSoundoption_change)
                 this.EffectSoundchange = 1;
-            else if (this.EffectSoundchange == 1)
-                this.EffectSoundchange = 2;
             else
                 this.EffectSoundchange++;
         }
@@ -342,20 +360,16 @@ public class SettingScreen extends Screen {
                 this.MasterSoundchange--;
         }
         if (this.returnCode == 400030) {
-            int MusicSoundoption_change = 5;
+            int MusicSoundoption_change = 2;
             if (this.MusicSoundchange == 1)
                 this.MusicSoundchange = MusicSoundoption_change;
-            else if (this.MusicSoundchange == 2)
-                this.MusicSoundchange = 1;
             else
                 this.MusicSoundchange--;
         }
         if (this.returnCode == 400040) {
-            int EffectSoundoption_change = 5;
+            int EffectSoundoption_change = 2;
             if (this.EffectSoundchange == 1)
                 this.EffectSoundchange = EffectSoundoption_change;
-            else if (this.EffectSoundchange == 2)
-                this.EffectSoundchange = 1;
             else
                 this.EffectSoundchange--;
         }

@@ -167,6 +167,12 @@ public final class Core {
             new Item(2002, "Store BGM 2", 1000);
 
     /**
+     * Sound variation
+     */
+    public static int MusicOn_Off = 1; // 1 == On, 0 == Off
+    public static int EffectOn_Off = 1; // 1 == On, 0 == Off
+
+    /**
      * Test implementation.
      *
      * @param args Program args, ignored.
@@ -428,11 +434,6 @@ public final class Core {
                     LOGGER.info("Closing score screen.");
                     break;
 
-                case 400120: case 400020: case 400030: case 400040:
-                    // Return to Main Menu
-                    returnCode = 1;
-                    break;
-
                 case 400130:
                     // Exit Program
                     returnCode = 0;
@@ -473,10 +474,12 @@ public final class Core {
                     LOGGER.info("Closing HUDSetting screen.");
                     break;
 
-                case 400010:
+                case 400120: case 400010: case 400020: case 400030: case 400040:
                     // Main menu.
                     /* This makes the old window disappear */
                     Frame old_frame = frame;
+                    /* Bgm on */
+                    Sound.backgroundmusic();
                     /* This creates a new window with new width & height values */
                     frame = new Frame(WIDTH, HEIGHT);
                     DrawManager.getInstance().setFrame(frame);
