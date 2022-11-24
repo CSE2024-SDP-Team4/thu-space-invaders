@@ -173,6 +173,7 @@ public class HUDSettingScreen extends Screen {
         drawManager.initDrawing(this);
         drawManager.drawHUDSettingMenu(this, this.colorchange);
         drawManager.drawHUDSettingOption(this, this.colorchange, onoffchange);
+        drawManager.drawHUDSettingOption2(this, this.colorchange, onoffchange);
         drawManager.completeDrawing(this);
     }
 

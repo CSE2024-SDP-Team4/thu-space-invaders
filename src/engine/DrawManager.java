@@ -968,7 +968,22 @@ public final class DrawManager {
 				defaultScreenmessage = OnOFFOption2;
 			}
 		}
-		else if (option == 2) {
+		else {
+			backBufferGraphics.setColor(Color.darkGray);
+		}
+		drawRightRegular2String(screen, defaultScreenmessage, screen.getHeight() / 3 + fontRegular2Metrics.getHeight());
+	}
+
+	public void drawHUDSettingOption2(final Screen screen, final int option, final int onoffchange) {
+		String defaultScreenmessage = "ONOFF";
+		String OnOFFOption1 = "ON";
+		String OnOFFOption2 = "OFF";
+
+
+		// 스크롤로 대체 예정이니까 Sound 담당하는 사람이 지우고 사용하면 됩니다.
+
+		// screenSize
+		if (option == 2) {
 			if (onoffchange == 0) {
 				backBufferGraphics.setColor(Color.MAGENTA);
 				defaultScreenmessage = OnOFFOption1;
@@ -981,7 +996,6 @@ public final class DrawManager {
 		else {
 			backBufferGraphics.setColor(Color.darkGray);
 		}
-		drawRightRegular2String(screen, defaultScreenmessage, screen.getHeight() / 3 + fontRegular2Metrics.getHeight());
 		drawRightRegular2String(screen, defaultScreenmessage, screen.getHeight() / 3 + fontRegular2Metrics.getHeight() * 3);
 	}
 
