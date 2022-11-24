@@ -589,8 +589,8 @@ public final class DrawManager {
 								  final int MasterSoundchange, final int MusicSoundchange, final int EffectSoundchange) {
 		String defaultScreenmessage = "Three mod";
 		String defaultMasterSoundmessage = "Five mod";
-		String defaultMusicSoundmessage = "Five mod";
-		String defaultEffectSoundmessage = "Five mod";
+		String defaultMusicSoundmessage = "Two mod";
+		String defaultEffectSoundmessage = "Two mod";
 		String screenSizeOption1 = "Standard";
 		String screenSizeOption2 = "Wide  Mode";
 		String screenSizeOption3 = "Full Mode";
@@ -599,6 +599,8 @@ public final class DrawManager {
 		String SoundOption3 = "75%";
 		String SoundOption4 = "100%";
 		String SoundOption5 = "0%";
+		String SoundOption6 = "On";
+		String SoundOption7 = "Off";
 
 		// 스크롤로 대체 예정이니까 Sound 담당하는 사람이 지우고 사용하면 됩니다.
 
@@ -654,23 +656,11 @@ public final class DrawManager {
 		if (option == 400030) {
 			if (MusicSoundchange == 1) {
 				backBufferGraphics.setColor(Color.white);
-				defaultMusicSoundmessage = SoundOption1;
+				defaultMusicSoundmessage = SoundOption6;
 			}
 			if (MusicSoundchange == 2) {
 				backBufferGraphics.setColor(Color.white);
-				defaultMusicSoundmessage = SoundOption2;
-			}
-			if (MusicSoundchange == 3) {
-				backBufferGraphics.setColor(Color.white);
-				defaultMusicSoundmessage = SoundOption3;
-			}
-			if (MusicSoundchange == 4) {
-				backBufferGraphics.setColor(Color.white);
-				defaultMusicSoundmessage = SoundOption4;
-			}
-			if (MusicSoundchange == 5) {
-				backBufferGraphics.setColor(Color.white);
-				defaultMusicSoundmessage = SoundOption5;
+				defaultMusicSoundmessage = SoundOption7;
 			}
 		} else
 			backBufferGraphics.setColor(Color.darkGray);
@@ -681,23 +671,11 @@ public final class DrawManager {
 		if (option == 400040) {
 			if (EffectSoundchange == 1) {
 				backBufferGraphics.setColor(Color.white);
-				defaultEffectSoundmessage = SoundOption1;
+				defaultEffectSoundmessage = SoundOption6;
 			}
 			if (EffectSoundchange == 2) {
 				backBufferGraphics.setColor(Color.white);
-				defaultEffectSoundmessage = SoundOption2;
-			}
-			if (EffectSoundchange == 3) {
-				backBufferGraphics.setColor(Color.white);
-				defaultEffectSoundmessage = SoundOption3;
-			}
-			if (EffectSoundchange == 4) {
-				backBufferGraphics.setColor(Color.white);
-				defaultEffectSoundmessage = SoundOption4;
-			}
-			if (EffectSoundchange == 5) {
-				backBufferGraphics.setColor(Color.white);
-				defaultEffectSoundmessage = SoundOption5;
+				defaultEffectSoundmessage = SoundOption7;
 			}
 		} else
 			backBufferGraphics.setColor(Color.darkGray);

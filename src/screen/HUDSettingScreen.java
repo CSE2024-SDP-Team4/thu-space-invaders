@@ -4,6 +4,7 @@ import java.awt.*;
 import java.awt.event.KeyEvent;
 import engine.Cooldown;
 import engine.Core;
+import engine.Sound;
 
 
 /**
@@ -71,22 +72,26 @@ public class HUDSettingScreen extends Screen {
 
             if (inputManager.isKeyDown(KeyEvent.VK_LEFT)
                     || inputManager.isKeyDown(KeyEvent.VK_A)) {
+                new Sound().buttonsound();
                 previousONOFFChange();
                 this.selectionCooldown.reset();
             }
             if (inputManager.isKeyDown(KeyEvent.VK_RIGHT)
                     || inputManager.isKeyDown(KeyEvent.VK_D)) {
+                new Sound().buttonsound();
                 nextONOFFChange();
                 this.selectionCooldown.reset();
             }
 
             if (inputManager.isKeyDown(KeyEvent.VK_UP)
                     || inputManager.isKeyDown(KeyEvent.VK_W)) {
+                new Sound().buttonsound();
                 previousItem();
                 this.selectionCooldown.reset();
             }
             if (inputManager.isKeyDown(KeyEvent.VK_DOWN)
                     || inputManager.isKeyDown(KeyEvent.VK_S)) {
+                new Sound().buttonsound();
                 nextItem();
                 this.selectionCooldown.reset();
             }

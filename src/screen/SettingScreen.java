@@ -4,6 +4,7 @@ import java.awt.event.KeyEvent;
 import java.awt.*;
 import engine.Cooldown;
 import engine.Core;
+import engine.Sound;
 /**
  * Implements the setting screen, it shows setting menu.
  *
@@ -81,30 +82,48 @@ public class SettingScreen extends Screen {
                 && this.inputDelay.checkFinished()) {
             if (inputManager.isKeyDown(KeyEvent.VK_LEFT)
                     || inputManager.isKeyDown(KeyEvent.VK_A)) {
+                new Sound().buttonsound();
                 previousScreenMenuChange();
                 this.selectionCooldown.reset();
             }
             if (inputManager.isKeyDown(KeyEvent.VK_RIGHT)
                     || inputManager.isKeyDown(KeyEvent.VK_D)) {
+                new Sound().buttonsound();
                 nextScreenMenuChange();
                 this.selectionCooldown.reset();
             }
             if (inputManager.isKeyDown(KeyEvent.VK_UP)
                     || inputManager.isKeyDown(KeyEvent.VK_W)) {
+                new Sound().buttonsound();
                 previousItem();
                 this.selectionCooldown.reset();
             }
             if (inputManager.isKeyDown(KeyEvent.VK_DOWN)
                     || inputManager.isKeyDown(KeyEvent.VK_S)) {
+                new Sound().buttonsound();
                 nextItem();
                 this.selectionCooldown.reset();
             }
-            if (inputManager.isKeyDown(KeyEvent.VK_SPACE))
+            if (inputManager.isKeyDown(KeyEvent.VK_SPACE)){
+                if (this.returnCode == 400020) {
+                    changeMasterSound();
+                }
+                if (this.returnCode == 400030) {
+                    changeMusicSound();
+                }
+                if (this.returnCode == 400040) {
+                    changeEffectSound();
+                }
+                new Sound().buttonsound();
+                Sound.MusicStop();
                 this.isRunning = false;
 
+            }
             if (this.returnCode == 400010) {
                 changeScreenSize();
             }
+
+
         }
     }
 
@@ -112,6 +131,7 @@ public class SettingScreen extends Screen {
      * change screen size
      */
     private void changeScreenSize() {
+
         if (this.Screenchange == 1) // Standard
             Core.setSize(448, 520);
         else if (this.Screenchange == 2) // Extended
@@ -119,6 +139,34 @@ public class SettingScreen extends Screen {
         else if (this.Screenchange == 3) // Full Screen
             Core.setSize(screenSize.width, screenSize.height);
     }
+
+    private void changeMasterSound(){
+        if(this.MasterSoundchange == 1)
+            Sound.setMasterChange(0.2f);
+        else if (this.MasterSoundchange == 2)
+            Sound.setMasterChange(0.5f);
+        else if (this.MasterSoundchange == 3)
+            Sound.setMasterChange(0.7f);
+        else if (this.MasterSoundchange == 4)
+            Sound.setMasterChange(1.0f);
+        else if (this.MasterSoundchange == 5)
+            Sound.setMasterChange(0.0f);
+    }
+
+    private void changeMusicSound(){
+        if(this.MusicSoundchange == 1)
+            Core.MusicOn_Off = 1;
+        else if (this.MusicSoundchange == 2)
+            Core.MusicOn_Off = 0;
+    }
+
+    private void changeEffectSound(){
+        if(this.EffectSoundchange == 1)
+            Core.EffectOn_Off = 1;
+        else if (this.EffectSoundchange == 2)
+            Core.EffectOn_Off = 0;
+    }
+
 
 
     /**
@@ -251,6 +299,7 @@ public class SettingScreen extends Screen {
      * Shifts the focus to the next change in the settings option.
      */
     private void nextScreenMenuChange() {
+        // 400010 = Screen Size
         if (this.returnCode == 400010) {
             int screenoption_changes = 3;
             if (this.Screenchange == screenoption_changes)
@@ -260,6 +309,7 @@ public class SettingScreen extends Screen {
             else
                 this.Screenchange++;
         }
+        // 400020 = Master sound
         if (this.returnCode == 400020) {
             int MasterSoundoption_change = 5;
             if(this.MasterSoundchange == MasterSoundoption_change)
@@ -269,21 +319,19 @@ public class SettingScreen extends Screen {
             else
                 this.MasterSoundchange++;
         }
+        // 400030 = Music sound
         if (this.returnCode == 400030) {
-            int MasterSoundoption_change = 5;
+            int MasterSoundoption_change = 2;
             if(this.MusicSoundchange == MasterSoundoption_change)
                 this.MusicSoundchange = 1;
-            else if (this.MusicSoundchange == 1)
-                this.MusicSoundchange = 2;
             else
                 this.MusicSoundchange++;
         }
+        // 400040 = Effect sound
         if (this.returnCode == 400040) {
-            int MasterSoundoption_change = 5;
+            int MasterSoundoption_change = 2;
             if(this.EffectSoundchange == MasterSoundoption_change)
                 this.EffectSoundchange = 1;
-            else if (this.EffectSoundchange == 1)
-                this.EffectSoundchange = 2;
             else
                 this.EffectSoundchange++;
         }
@@ -312,20 +360,16 @@ public class SettingScreen extends Screen {
                 this.MasterSoundchange--;
         }
         if (this.returnCode == 400030) {
-            int MusicSoundoption_change = 5;
+            int MusicSoundoption_change = 2;
             if (this.MusicSoundchange == 1)
                 this.MusicSoundchange = MusicSoundoption_change;
-            else if (this.MusicSoundchange == 2)
-                this.MusicSoundchange = 1;
             else
                 this.MusicSoundchange--;
         }
         if (this.returnCode == 400040) {
-            int EffectSoundoption_change = 5;
+            int EffectSoundoption_change = 2;
             if (this.EffectSoundchange == 1)
                 this.EffectSoundchange = EffectSoundoption_change;
-            else if (this.EffectSoundchange == 2)
-                this.EffectSoundchange = 1;
             else
                 this.EffectSoundchange--;
         }

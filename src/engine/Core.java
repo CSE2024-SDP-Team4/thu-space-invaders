@@ -167,6 +167,12 @@ public final class Core {
             new Item(2002, "Store BGM 2", 1000);
 
     /**
+     * Sound variation
+     */
+    public static int MusicOn_Off = 1; // 1 == On, 0 == Off
+    public static int EffectOn_Off = 1; // 1 == On, 0 == Off
+
+    /**
      * Test implementation.
      *
      * @param args Program args, ignored.
@@ -230,13 +236,14 @@ public final class Core {
 
         GameState gameState;
 
+        Sound.backgroundmusic();
+
         int returnCode = 1;
         int playerAmount = 1;
         do {
             gameState = new GameState(1, 0, MAX_LIVES, 0, 0, Coin.balance);
 
             switch (returnCode) {
-
                 case 1:
                     // Main menu.
                     currentScreen = new TitleScreen(width, height, FPS);
@@ -271,7 +278,6 @@ public final class Core {
                     // Practice Mode
                     diff = 0;
                     do {
-                        new Sound().backroundmusic();
                         // One extra live every few levels.
                         boolean bonusLife = gameState.getLevel()
                                 % EXTRA_LIFE_FRECUENCY == 0
@@ -312,7 +318,6 @@ public final class Core {
                     // Easy Mode
                     diff = 1;
                     do {
-                        new Sound().backroundmusic();
                         // One extra live every few levels.
                         boolean bonusLife = gameState.getLevel()
                                 % EXTRA_LIFE_FRECUENCY == 0
@@ -353,7 +358,6 @@ public final class Core {
                     // Normal Mode
                     diff = 2;
                     do {
-                        new Sound().backroundmusic();
                         // One extra live every few levels.
                         boolean bonusLife = gameState.getLevel()
                                 % EXTRA_LIFE_FRECUENCY == 0
@@ -394,7 +398,6 @@ public final class Core {
                     // Hard Mode
                     diff = 3;
                     do {
-                        new Sound().backroundmusic();
                         // One extra live every few levels.
                         boolean bonusLife = gameState.getLevel()
                                 % EXTRA_LIFE_FRECUENCY == 0
@@ -429,11 +432,6 @@ public final class Core {
                     currentScreen = new ScoreScreen(width, height, FPS, gameState);
                     returnCode = frame.setScreen(currentScreen);
                     LOGGER.info("Closing score screen.");
-                    break;
-
-                case 400120:
-                    // Return to Main Menu
-                    returnCode = 1;
                     break;
 
                 case 400130:
@@ -476,10 +474,12 @@ public final class Core {
                     LOGGER.info("Closing HUDSetting screen.");
                     break;
 
-                case 400010:
+                case 400120: case 400010: case 400020: case 400030: case 400040:
                     // Main menu.
                     /* This makes the old window disappear */
                     Frame old_frame = frame;
+                    /* Bgm on */
+                    Sound.backgroundmusic();
                     /* This creates a new window with new width & height values */
                     frame = new Frame(WIDTH, HEIGHT);
                     DrawManager.getInstance().setFrame(frame);
