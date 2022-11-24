@@ -4,6 +4,7 @@ import java.awt.*;
 import java.awt.event.KeyEvent;
 import engine.Cooldown;
 import engine.Core;
+import engine.Sound;
 
 
 /**
@@ -60,11 +61,13 @@ public class LevelMenuScreen extends Screen {
 
             if (inputManager.isKeyDown(KeyEvent.VK_UP)
                     || inputManager.isKeyDown(KeyEvent.VK_W)) {
+                new Sound().buttonsound();
                 previouslevelItem();
                 this.selectionCooldown.reset();
             }
             if (inputManager.isKeyDown(KeyEvent.VK_DOWN)
                     || inputManager.isKeyDown(KeyEvent.VK_S)) {
+                new Sound().buttonsound();
                 nextlevelItem();
                 this.selectionCooldown.reset();
             }

@@ -4,6 +4,7 @@ import java.awt.event.KeyEvent;
 import java.awt.*;
 import engine.Cooldown;
 import engine.Core;
+import engine.Sound;
 
 
 /**
@@ -57,11 +58,13 @@ public class LevelScreen extends Screen {
                 && this.inputDelay.checkFinished()) {
             if (inputManager.isKeyDown(KeyEvent.VK_UP)
                     || inputManager.isKeyDown(KeyEvent.VK_W)) {
+                new Sound().buttonsound();
                 previousLevel();
                 this.selectionCooldown.reset();
             }
             if (inputManager.isKeyDown(KeyEvent.VK_DOWN)
                     || inputManager.isKeyDown(KeyEvent.VK_S)) {
+                new Sound().buttonsound();
                 nextLevel();
                 this.selectionCooldown.reset();
             }

@@ -22,19 +22,21 @@ public class ShakeScreen extends Screen {
 
     public static void vibrate() {
         try {
-            final int originalX = frame.getLocationOnScreen().x;
-            final int originalY = frame.getLocationOnScreen().y;
-            for(int i = 0; i < SHAKE_LENGTH; i++) {
-                Thread.sleep(10);
-                frame.setLocation(originalX, originalY + SHAKE_VELO);
-                Thread.sleep(10);
-                frame.setLocation(originalX, originalY - SHAKE_VELO);
-                Thread.sleep(10);
-                frame.setLocation(originalX + SHAKE_VELO, originalY);
-                Thread.sleep(10);
-                frame.setLocation(originalX - SHAKE_VELO, originalY);
-                Thread.sleep(10);
-                frame.setLocation(originalX, originalY);
+            if (HUDSettingScreen.isshake == true) {
+                final int originalX = frame.getLocationOnScreen().x;
+                final int originalY = frame.getLocationOnScreen().y;
+                for (int i = 0; i < SHAKE_LENGTH; i++) {
+                    Thread.sleep(10);
+                    frame.setLocation(originalX, originalY + SHAKE_VELO);
+                    Thread.sleep(10);
+                    frame.setLocation(originalX, originalY - SHAKE_VELO);
+                    Thread.sleep(10);
+                    frame.setLocation(originalX + SHAKE_VELO, originalY);
+                    Thread.sleep(10);
+                    frame.setLocation(originalX - SHAKE_VELO, originalY);
+                    Thread.sleep(10);
+                    frame.setLocation(originalX, originalY);
+                }
             }
         }
         catch (Exception err) {

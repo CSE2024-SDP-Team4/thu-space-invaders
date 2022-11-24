@@ -235,6 +235,7 @@ public final class Core {
         gameSettings.add(SETTINGS_LEVEL_5_H);
 
         GameState gameState;
+
         Sound.backgroundmusic();
 
         int returnCode = 1;
@@ -243,7 +244,6 @@ public final class Core {
             gameState = new GameState(1, 0, MAX_LIVES, 0, 0, Coin.balance);
 
             switch (returnCode) {
-
                 case 1:
                     // Main menu.
                     currentScreen = new TitleScreen(width, height, FPS);

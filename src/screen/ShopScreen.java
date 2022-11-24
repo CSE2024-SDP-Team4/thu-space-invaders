@@ -88,6 +88,7 @@ public class ShopScreen extends Screen {
 						&& this.inputDelay.checkFinished()) {
 					if (inputManager.isKeyDown(KeyEvent.VK_LEFT)
 							|| inputManager.isKeyDown(KeyEvent.VK_A)) {
+						new Sound().buttonsound();
 						if (invrow == 0)
 							invrow = 0;
 						else
@@ -95,6 +96,7 @@ public class ShopScreen extends Screen {
 						this.selectionCooldown.reset();
 					} else if (inputManager.isKeyDown(KeyEvent.VK_RIGHT)
 							|| inputManager.isKeyDown(KeyEvent.VK_D)) {
+						new Sound().buttonsound();
 						if (invrow == 2)
 							invrow = 2;
 						else
@@ -102,6 +104,7 @@ public class ShopScreen extends Screen {
 						this.selectionCooldown.reset();
 					} else if (inputManager.isKeyDown(KeyEvent.VK_UP)
 							|| inputManager.isKeyDown(KeyEvent.VK_W)) {
+						new Sound().buttonsound();
 						if (invcol == 0)
 							invcol = 0;
 						else
@@ -109,6 +112,7 @@ public class ShopScreen extends Screen {
 						this.selectionCooldown.reset();
 					} else if (inputManager.isKeyDown(KeyEvent.VK_DOWN)
 							|| inputManager.isKeyDown(KeyEvent.VK_S)) {
+						new Sound().buttonsound();
 						if (invcol == 1)
 							invcol = 1;
 						else
@@ -191,6 +195,7 @@ public class ShopScreen extends Screen {
 						&& this.inputDelay.checkFinished()) {
 					if (inputManager.isKeyDown(KeyEvent.VK_LEFT)
 						|| inputManager.isKeyDown(KeyEvent.VK_A)) {
+						new Sound().buttonsound();
 						if (modaloption == 1)
 							modaloption--;
 						else
@@ -199,6 +204,7 @@ public class ShopScreen extends Screen {
 					}
 					else if (inputManager.isKeyDown(KeyEvent.VK_RIGHT)
 							|| inputManager.isKeyDown(KeyEvent.VK_D)) {
+						new Sound().buttonsound();
 						if (modaloption == 0) {
 							modaloption++;
 						}
