@@ -114,7 +114,6 @@ public class SettingScreen extends Screen {
                 if (this.returnCode == 400040) {
                     changeEffectSound();
                 }
-                new Sound().buttonsound();
                 Sound.MusicStop();
                 this.isRunning = false;
 
