@@ -6,9 +6,6 @@ import javax.swing.*;
 
 import screen.Screen;
 
-import java.awt.Graphics;
-import java.awt.Image;
-
 /**
  * Implements a frame to show screens on.
  *
@@ -25,6 +22,14 @@ public class Frame extends JFrame {
 	/** Screen currently shown. */
 	private Screen currentScreen;
 
+	/**
+	 * Initializes the new frame.
+	 *
+	 * @param width
+	 *            Frame width.
+	 * @param height
+	 *            Frame height.
+	 */
 
 	class MyPanel extends JPanel{
 		ImageIcon icon = new ImageIcon("C:/Users/USER/Desktop/sp.png");
@@ -35,60 +40,29 @@ public class Frame extends JFrame {
 		}
 	}
 
-	//시도 1
+	public Frame(final int width, final int height, ImageIcon img) {
+//		ImageIcon sp = new ImageIcon(("C:\\Users\\USER\\space_invador\\thu-space-invaders\\res\\tlqkf.jpg"));
+//		img = sp;
+//		Image imgs = img.getImage();
+//		Image updateImg = imgs.getScaledInstance(width, height, Image.SCALE_SMOOTH);
+//		ImageIcon changeImg = new ImageIcon(updateImg);
+//		JLabel lbl =  new JLabel(changeImg);
+//		add(lbl);
 
-	/**
-	JScrollPane scrollPane;
-	public Frame(){
-		ImageIcon icon = new ImageIcon("C:/Users/USER/Desktop/sp.png");
-
-		JPanel background = new JPanel() {
-			public void paintComponent(Graphics g){
-				g.drawImage(icon.getImage(),0,0,null);
-				setOpaque(false);
-				super.paintComponent(g);
-			}
-		};
-		scrollPane = new JScrollPane(background);
-		setContentPane(scrollPane);
-	}
-	**/
-	//시도 2
-
-	/**
-	 * Initializes the new frame.
-	 *
-	 * @param width
-	 *            Frame width.
-	 * @param height
-	 *            Frame height.
-	 */
-	public Frame(final int width, final int height) {
-		//추가된 줄 (시도 1)
 		MyPanel panel = new MyPanel();
 		this.add(panel, BorderLayout.CENTER);
-		// 테스트
-		//테스트 14
+
 		setSize(width, height);
 		setResizable(false);
-		setDefaultCloseOperation(EXIT_ON_CLOSE);
-
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setLocationRelativeTo(null);
 		setVisible(true);
-
 		Insets insets = getInsets();
 		this.width = width - insets.left - insets.right;
 		this.height = height - insets.top + insets.bottom;
 		setTitle("Invaders");
-
 		addKeyListener(Core.getInputManager());
 	}
-
-	//private Image background = new ImageIcon(Frame.class.getResource("C:/Users/USER/Desktop/sp.png")).getImage();
-	//public void paint(Graphics g) {//그리는 함수
-	//	g.drawImage(background, 0, 0, null);//background를 그려줌
-	//}
-	//시도 3
 
 	/**
 	 * Sets current screen.
@@ -122,3 +96,4 @@ public class Frame extends JFrame {
 		return this.height;
 	}
 }
+

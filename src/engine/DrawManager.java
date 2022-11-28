@@ -258,6 +258,9 @@ public final class DrawManager {
 	 */
 	Color[] bg_colors = {Color.LIGHT_GRAY, Color.GRAY, Color.DARK_GRAY};
 	public void initDrawing(final Screen screen) {
+
+		//Frame background = new Frame(get.width, height, img);
+
 		backBuffer = new BufferedImage(screen.getWidth(), screen.getHeight(),
 				BufferedImage.TYPE_INT_RGB);
 
@@ -270,7 +273,7 @@ public final class DrawManager {
 		else{
 			backBufferGraphics.setColor(Color.BLACK);
 		}
-
+		//gamestate를 null로 해주니깐 내가 설정한 배경이 뜸
 		backBufferGraphics
 				.fillRect(0, 0, screen.getWidth(), screen.getHeight());
 

@@ -1,5 +1,7 @@
 package engine;
 
+import java.awt.*;
+import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.ConsoleHandler;
@@ -12,6 +14,7 @@ import entity.Ship;
 import screen.*;
 
 import javax.sound.sampled.Clip;
+import javax.swing.*;
 
 import engine.Inventory.InventoryEntry;
 
@@ -47,6 +50,8 @@ public final class Core {
     /**
      * Max fps of current screen.
      */
+    private static ImageIcon img = null;
+
     private static final int FPS = 60;
 
     /**
@@ -61,6 +66,17 @@ public final class Core {
      * Total number of levels.
      */
     private static final int NUM_LEVELS = 5;
+
+    /**
+     * Buffer Graphics.
+     */
+    private static Graphics backBufferGraphics;
+    /**
+     * Buffer image.
+     */
+    private static BufferedImage backBuffer;
+
+    private static Graphics graphics;
 
     /**
      * Difficulty settings for level 1.
@@ -189,7 +205,7 @@ public final class Core {
             e.printStackTrace();
         }
 
-        frame = new Frame(WIDTH, HEIGHT);
+        frame = new Frame(WIDTH, HEIGHT, img);
         DrawManager.getInstance().setFrame(frame);
         int width = frame.getWidth();
         int height = frame.getHeight();
@@ -481,7 +497,7 @@ public final class Core {
                     /* This makes the old window disappear */
                     Frame old_frame = frame;
                     /* This creates a new window with new width & height values */
-                    frame = new Frame(WIDTH, HEIGHT);
+                    frame = new Frame(WIDTH, HEIGHT, img);
                     DrawManager.getInstance().setFrame(frame);
                     width = frame.getWidth();
                     height = frame.getHeight();
