@@ -267,12 +267,12 @@ public final class DrawManager {
 		graphics = frame.getGraphics();
 		backBufferGraphics = backBuffer.getGraphics();
 
-		if(GameScreen.lives > 0 && GameScreen.lives <= 3){
-			backBufferGraphics.setColor(bg_colors[3 - GameScreen.lives]);
-		}
-		else{
-			backBufferGraphics.setColor(Color.BLACK);
-		}
+		//if(GameScreen.lives > 0 && GameScreen.lives <= 3){
+		//	backBufferGraphics.setColor(bg_colors[3 - GameScreen.lives]);
+		//}
+		//else{
+		backBufferGraphics.setColor(Color.pink);
+		//}
 		//gamestate를 null로 해주니깐 내가 설정한 배경이 뜸
 		backBufferGraphics
 				.fillRect(0, 0, screen.getWidth(), screen.getHeight());
