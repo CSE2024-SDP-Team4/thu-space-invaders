@@ -204,12 +204,12 @@ public class HUDSettingScreen extends Screen {
         }
     }
 
-    public void changeScreenShake(){
-        if(this.onoffchange == 0){
-            this.isshake = true;
+    public static void changeScreenShake(){
+        if(HUDSettingScreen.onoffchange == 0){
+            HUDSettingScreen.isshake = true;
         }
         else{
-            this.isshake = false;
+            HUDSettingScreen.isshake = false;
         }
 
     }
